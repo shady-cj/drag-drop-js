@@ -93,6 +93,15 @@ function getWord() {
 function getSyn() {
     searchWord = listOfWords[currentQuestion];
     console.log(searchWord);
+    if (searchWord === undefined) {
+        if (currentQuestion < numOfQuestions - 1) {
+            currentQuestion++;
+            arrOfAnswers.push(undefined);
+            return getSyn();
+        } else {
+            return displayResult();
+        }
+    }
     fetch(
         `https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${searchWord}?key=b993a7fe-7718-4827-b933-c0283f6cc94b`
     )
@@ -119,9 +128,13 @@ function getSyn() {
             }
         })
         .catch((err) => {
-            currentQuestion++;
-            arrOfAnswers.push(undefined);
-            return getSyn();
+            if (currentQuestion < numOfQuestions - 1) {
+                currentQuestion++;
+                arrOfAnswers.push(undefined);
+                return getSyn();
+            } else {
+                displayResult();
+            }
         });
     return;
 }
@@ -303,14 +316,17 @@ function displayResult() {
             indexOfUndefined.push(index);
         }
     });
-    console.log(indexOfUndefined);
+    listOfWords.forEach((val, index) => {
+        if (val === undefined) {
+            indexOfUndefined.push(index);
+        }
+    });
+    indexOfUndefined = new Set(indexOfUndefined);
     indexOfUndefined.forEach(function (ind) {
         arrOfAnswers.splice(ind, 1);
         listOfWords.splice(ind, 1);
     });
 
-    console.log(arrOfAnswers);
-    console.log(listOfWords);
     for (let i = 0; i < listOfWords.length; i++) {
         let classForUser =
             arrOfAnswers[i].trim() === arrOfUsersAnswers[i].trim()
