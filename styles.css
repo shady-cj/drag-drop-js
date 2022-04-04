@@ -21,7 +21,7 @@ body {
     background-size: cover;
     background-position: center;
     /* backdrop-filter: grayscale(90%); */
-    background-color: rgb(161, 150, 150);
+    background-color: rgb(161, 150, 150, 0.1);
     /* background-blend-mode: color-dodge; */
 }
 .flex {
