@@ -211,7 +211,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 70vh;
-    box-shadow: inset 3px 7px 9px cadetblue, 5px 8px 12px rgb(224, 19, 19);
+    box-shadow: inset 0px 0px 12px cadetblue, 0px 0px 16px rgb(224, 19, 19);
     border-radius: 50px;
 }
 .loader h1 {
